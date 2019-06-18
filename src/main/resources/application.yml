@@ -8,3 +8,4 @@ spring:
   thymeleaf:
     suffix: .html
     prefix: classpath:/templates/
+    cache: false
