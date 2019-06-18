@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
  * @Description:
  **/
 @Component
-class MyPasswordEncoderimplements implements PasswordEncoder {
+class MyPasswordEncoder implements PasswordEncoder {
 
     @Override
     public String encode(CharSequence charSequence) {

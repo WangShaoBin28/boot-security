@@ -1,11 +1,13 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.w3.org/1999/xhtml">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8"/>
     <title>Hello World!</title>
+
 </head>
 <body>
-<h1>Hello world!<p th:text="#{user.username}">default message</p></h1>
+<h1>Hello world!</h1>
+<p th:text="${user}">#{user}default message</p>
 <a th:href="@{/logout}">点击退出</a>
 </body>
 </html>

@@ -1,5 +1,6 @@
 package com.app.controller;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.Enumeration;
 
 /**
  * @Package com.app.controller
@@ -24,6 +26,7 @@ import javax.servlet.http.HttpServletResponse;
  * @Description:
  **/
 @Controller
+@Slf4j
 public class TestEndpoints {
 
     @GetMapping("/product/{id}")
@@ -46,11 +49,12 @@ public class TestEndpoints {
     }
 
     @RequestMapping("/hello")
-    public String hello(Model model) {
-        UsernamePasswordAuthenticationToken authenticationToken = (UsernamePasswordAuthenticationToken) SecurityContextHolder.getContext().getAuthentication();
-//details里面可能存放了当前登录用户的详细信息，也可以通过cast后拿到
-        User userDetails = (User) authenticationToken.getDetails();
-        model.addAttribute("user", userDetails);
+    public String hello(Model model,HttpServletRequest request) {
+        Enumeration<String> attributeNames = request.getAttributeNames();
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        log.info("我的数据为{}",  authentication.getDetails());
+
+        model.addAttribute("user", authentication.getDetails());
         return "hello";
     }
 
