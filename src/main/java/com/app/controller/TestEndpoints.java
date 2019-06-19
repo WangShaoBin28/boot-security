@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.security.Principal;
 import java.util.Enumeration;
 
 /**
@@ -50,11 +51,11 @@ public class TestEndpoints {
 
     @RequestMapping("/hello")
     public String hello(Model model,HttpServletRequest request) {
-        Enumeration<String> attributeNames = request.getAttributeNames();
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        log.info("我的数据为{}",  authentication.getDetails());
+        Principal principal = request.getUserPrincipal();
+        log.info("我的数据为{}",   principal.getName());
 
-        model.addAttribute("user", authentication.getDetails());
+
+        model.addAttribute("user",  principal.getName());
         return "hello";
     }
 

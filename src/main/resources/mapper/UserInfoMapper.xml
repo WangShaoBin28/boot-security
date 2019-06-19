@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.app.dao.UserInfoMapper">
+  <resultMap id="BaseResultMap" type="com.app.entity.UserInfo">
+    <!--@mbg.generated-->
+    <id column="id" property="id" />
+    <result column="user_name" property="userName" />
+    <result column="phone" property="phone" />
+    <result column="openid" property="openid" />
+    <result column="createTime" property="createtime" />
+    <result column="updateTime" property="updatetime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    id, user_name, phone, openid, createTime, updateTime
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select 
+    <include refid="Base_Column_List" />
+    from mysell.user_info
+    where id = #{id}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    <!--@mbg.generated-->
+    delete from mysell.user_info
+    where id = #{id}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.app.entity.UserInfo" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into mysell.user_info (user_name, phone, openid, createTime, updateTime)
+    values (#{userName}, #{phone}, #{openid}, #{createtime}, #{updatetime})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.app.entity.UserInfo">
+    <!--@mbg.generated-->
+    update mysell.user_info
+    set user_name = #{userName},
+      phone = #{phone},
+      openid = #{openid},
+      createTime = #{createtime},
+      updateTime = #{updatetime}
+    where id = #{id}
+  </update>
+
+  <select id="selectByUserName" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from user_info where user_name = #{userName}
+  </select>
+</mapper>
